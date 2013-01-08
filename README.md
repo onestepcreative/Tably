@@ -1,4 +1,4 @@
-# Tab It
+# Tably
 
 a simple, lightweight plugin for creating tabbed content and storing active tab to cookie.
 
@@ -8,17 +8,17 @@ This script requires the use of the jQuery cookies to take advantage of the acti
 
 ```html
 <script src="/path/to/jquery.cookie.js"></script>
-<script src="/path/to/tabit.jquery.js"></script>
+<script src="/path/to/tably.jquery.js"></script>
 ```
 
 **Please do not unclude the scripts directly from GitHub.**
 
 ## Usage
 
-Instantiate the TabIt Plugin.
+Instantiate the Tably Plugin.
 ```javascript
 $(function() {
-	$.tabIt({
+	$.tably({
 		// Define your options here
 	});
 }
@@ -29,7 +29,7 @@ $(function() {
 Setup options & selectors for your plugin config.
 ```javascript
 $(function() {
-	$.tabIt({
+	$.tably({
 		activeClass:          'active',			// Class assigned to active tab + content
 		tabContainer:         '#tabContainer',		// Container holding your tabs
 		tabContentContainer:  '#tabContentContainer',	// Container holding tabbed content
@@ -41,7 +41,7 @@ $(function() {
 ```
 ## Sample HTML Markup
 
-Use the configuration script *above* to help better understand the relationship between the TabIt Plugin and the HTML Markup provide below. The above config settings are the defaults setup in the TabIt Plugin. The HTML markup below assumes the default settings in the TabIt Plugin. 
+Use the configuration script *above* to help better understand the relationship between the Tably Plugin and the HTML Markup provide below. The above config settings are the defaults setup in the Tably Plugin. The HTML markup below assumes the default settings in the Tably Plugin. 
 
 **Note: There should be me as many tabContent's as there are tabs, to create even tab:content relationship**
 

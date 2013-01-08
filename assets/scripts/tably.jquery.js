@@ -16,7 +16,7 @@
 	tab content.
 	
 	This plugin requires jQuery Cookies to
-	take advantage of active tab cookies.
+	take advantage of active tab saving.
 	
 	Download Cookies: https://github.com/carhartl/jquery-cookie
 
@@ -27,7 +27,7 @@
 
 	$.extend({
 		
-		tabIt: function(options) {
+		tably: function(options) {
 			
 			
 			// SETUP DEFAULTS FOR OUR PLUGIN
@@ -38,7 +38,8 @@
 				tabContentContaier:		'#tabContentContainer',
 				tabSelector:			'.tab',
 				contentSelector:		'.tabContent',
-				tabTransition:			true	
+				tabTransition:			true,
+				enableSaving:			true
 				
 			};
 			
