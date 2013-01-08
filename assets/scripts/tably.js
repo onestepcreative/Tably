@@ -4,7 +4,7 @@
 	Twitter: 	@onestepcreative
 	Website: 	developerstoolbox.net
 	
-	Version:	1.1
+	Version:	1.2
 	
 	This plugin allows for you to define your
 	tabs, and your tab content by simple selectors.
@@ -51,6 +51,12 @@
 				o 				= options;
 
 
+			// IF SAVING IS SET TO FALSE, DESTROY COOKIE
+			if(o.enableSaving === false) {
+				
+				$.cookie('tab_active', null, cookieOptions);
+				
+			}
 
 			// ASSIGN DATA ATTRIBUTES TO TABS
 			$(o.tabSelector).each(function(i) {
@@ -62,9 +68,9 @@
 				$(this).attr('data-index', index);
 				
 				// IF COOKIE VALUE ISN'T SET, ASSIGN ACTIVE CLASS TO FIRST TAB
-				if(cookieValue === undefined) {
+				if(cookieValue === null || cookieValue === undefined || o.enableSaving === false) {
 					
-					if(i === 1) { 
+					if(index === 1) { 
 					
 						$(this).addClass(o.activeClass); 
 						
@@ -85,9 +91,9 @@
 				$(this).attr('data-index', index);
 				
 				// IF COOKIE VALUE ISN'T SET, ASSIGN ACTIVE CLASS TO FIRST TAB CONTENT
-				if(cookieValue === undefined) {
+				if(cookieValue === null || cookieValue === undefined || o.enableSaving === false) {
 				
-					if(i === 1) { 
+					if(index === 1) { 
 					
 						$(this).addClass(o.activeClass); 
 						
@@ -97,22 +103,34 @@
 				
 			});
 			
-			
 			var activeIndex = $('.tab' + o.activeClass).data('index');
 			
-			// IF COOKIE DOESN'T EXIST, CREATE IT
-			if(cookieValue === undefined) {
-				
-				$.cookie('tab_active', activeIndex, cookieOptions);
+			// READ AND SAVE COOKIES IF ENABLED IN SETTINGS
+			if(o.enableSaving === true) {
 			
-			// IF COOKIE DOES EXIST, APPLY ITS VALUE	
-			} else if($.cookie('tab_active')) {
+				// IF COOKIE DOESN'T EXIST, CREATE IT
+				if(cookieValue === undefined) {
+					
+					$.cookie('tab_active', activeIndex, cookieOptions);
+				
+				// IF COOKIE DOES EXIST, APPLY ITS VALUE	
+				} else if($.cookie('tab_active')) {
+					
+					$(o.tabSelector).removeClass(o.activeClass);
+					$(o.contentSelector).removeClass(o.activeClass);
+					
+					$(o.tabSelector + '[data-index="' + cookieValue + '"]').addClass(o.activeClass);
+					$(o.contentSelector + '[data-index="' + cookieValue + '"]').addClass(o.activeClass);
+					
+				}
+			
+			} else {
 				
 				$(o.tabSelector).removeClass(o.activeClass);
 				$(o.contentSelector).removeClass(o.activeClass);
 				
-				$(o.tabSelector + '[data-index="' + cookieValue + '"]').addClass(o.activeClass);
-				$(o.contentSelector + '[data-index="' + cookieValue + '"]').addClass(o.activeClass);
+				$(o.tabSelector + '[data-index="1"]').addClass(o.activeClass);
+				$(o.contentSelector + '[data-index="1"]').addClass(o.activeClass);
 				
 			}
 			
@@ -121,7 +139,7 @@
 			// CLICK HANDLING WITH COOKIE ASSIGNMENT
 			$(o.tabSelector).on('click', function() {
 				
-				var dataIndex	= $(this).data('index');
+				var dataIndex = $(this).data('index');
 				
 				// IF COOKIE EXISTS, DESTROY IT
 				if ($.cookie('tab_active')) {
@@ -150,9 +168,21 @@
 				}
 
 		        var cookieValue = dataIndex;
-
-	            // SET COOKIE
-	            $.cookie('tab_active', cookieValue, cookieOptions);
+		        
+		        // IF SAVING IS SET TO TRUE, SET COOKIE
+		        if(o.enableSaving === true) {
+	            
+		            // SET COOKIE
+		            $.cookie('tab_active', cookieValue, cookieOptions);
+				
+				} else {
+					
+					// SET COOKIE TO NULL
+		            $.cookie('tab_active', null, cookieOptions);
+					
+				}
+				
+				console.log(cookieValue);
 				
 			});
 			
