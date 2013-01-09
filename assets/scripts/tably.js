@@ -4,7 +4,7 @@
 	Twitter: 	@onestepcreative
 	Website: 	developerstoolbox.net
 	
-	Version:	1.2
+	Version:	1.1
 	
 	This plugin allows for you to define your
 	tabs, and your tab content by simple selectors.
@@ -137,7 +137,7 @@
 			
 			
 			// CLICK HANDLING WITH COOKIE ASSIGNMENT
-			$(o.tabSelector).on('click', function() {
+			$(o.tabSelector).on('click', function(e) {
 				
 				var dataIndex = $(this).data('index');
 				
@@ -148,7 +148,8 @@
 		   			$.cookie('tab_active', null, cookieOptions);
 		            
 		        }
-
+		        
+		        // IF TRANSITIONS ARE SET TO TRUE, FADE IN / OUT
 				if(o.tabTransition) {
 					
 					$(o.tabSelector).removeClass(o.activeClass);
@@ -156,7 +157,8 @@
 					
 					$(this).addClass(o.activeClass);
 					$(o.contentSelector + '[data-index="' + dataIndex + '"]').fadeIn(300).addClass(o.activeClass);
-					
+				
+				// IF SET TO FALSE, SIMPLY SHOW / HIDE
 				} else {
 				
 					$(o.tabSelector).removeClass(o.activeClass);
@@ -182,7 +184,7 @@
 					
 				}
 				
-				console.log(cookieValue);
+				e.preventDefault();
 				
 			});
 			
