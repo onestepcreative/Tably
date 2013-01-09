@@ -9,6 +9,7 @@ This plugin creates a tab:content relationship by assigning 'data-index' to a ta
 **Please do not unclude the scripts directly from GitHub.**
 
 ```html
+<script src="/path/to/jquery.min.js"></script>
 <script src="/path/to/jquery.cookie.js"></script>
 <script src="/path/to/tably.js"></script>
 ```
