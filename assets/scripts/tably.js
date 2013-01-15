@@ -35,7 +35,7 @@
 				
 				activeClass:			'active',
 				tabContainer: 			'#tabContainer',
-				tabContentContaier:		'#tabContentContainer',
+				tabContentContainer:	'#tabContentContainer',
 				tabSelector:			'.tab',
 				contentSelector:		'.tabContent',
 				tabTransition:			true,
