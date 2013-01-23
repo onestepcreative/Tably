@@ -38,7 +38,8 @@
 				tabContentContainer:	'#tabContentContainer',
 				tabSelector:			'.tab',
 				contentSelector:		'.tabContent',
-				tabTransition:			true,
+				tabTransition:			false,
+				transitionTime:			250,
 				enableSaving:			true
 				
 			};
@@ -103,7 +104,7 @@
 				
 			});
 			
-			var activeIndex = $('.tab' + o.activeClass).data('index');
+			var activeIndex = $(o.tabSelector + o.activeClass).data('index');
 			
 			// READ AND SAVE COOKIES IF ENABLED IN SETTINGS
 			if(o.enableSaving === true) {
@@ -116,7 +117,7 @@
 				// IF COOKIE DOES EXIST, APPLY ITS VALUE	
 				} else if($.cookie('tab_active')) {
 					
-					$(o.tabSelector).removeClass(o.activeClass);
+					$(o.tabSelector + o.activeClass).removeClass(o.activeClass);
 					$(o.contentSelector).removeClass(o.activeClass);
 					
 					$(o.tabSelector + '[data-index="' + cookieValue + '"]').addClass(o.activeClass);
@@ -126,7 +127,7 @@
 			
 			} else {
 				
-				$(o.tabSelector).removeClass(o.activeClass);
+				$(o.tabSelector + o.activeClass).removeClass(o.activeClass);
 				$(o.contentSelector).removeClass(o.activeClass);
 				
 				$(o.tabSelector + '[data-index="1"]').addClass(o.activeClass);
@@ -152,16 +153,16 @@
 		        // IF TRANSITIONS ARE SET TO TRUE, FADE IN / OUT
 				if(o.tabTransition) {
 					
-					$(o.tabSelector).removeClass(o.activeClass);
-					$(o.contentSelector).fadeOut(300).removeClass(o.activeClass);
+					$(o.tabSelector + o.activeClass).removeClass(o.activeClass);
+					$(o.contentSelector).fadeOut(o.transitionTime).removeClass(o.activeClass);
 					
 					$(this).addClass(o.activeClass);
-					$(o.contentSelector + '[data-index="' + dataIndex + '"]').fadeIn(300).addClass(o.activeClass);
+					$(o.contentSelector + '[data-index="' + dataIndex + '"]').fadeIn(o.transitionTime).addClass(o.activeClass);
 				
 				// IF SET TO FALSE, SIMPLY SHOW / HIDE
 				} else {
 				
-					$(o.tabSelector).removeClass(o.activeClass);
+					$(o.tabSelector + o.activeClass).removeClass(o.activeClass);
 					$(o.contentSelector).removeClass(o.activeClass);
 				
 					$(this).addClass(o.activeClass);
@@ -169,7 +170,7 @@
 					
 				}
 
-		        var cookieValue = dataIndex;
+		        cookieValue = dataIndex;
 		        
 		        // IF SAVING IS SET TO TRUE, SET COOKIE
 		        if(o.enableSaving === true) {
