@@ -153,7 +153,7 @@
 		        // IF TRANSITIONS ARE SET TO TRUE, FADE IN / OUT
 				if(o.tabTransition) {
 					
-					$(o.tabSelector + o.activeClass).removeClass(o.activeClass);
+					$(o.tabSelector).removeClass(o.activeClass);
 					$(o.contentSelector).fadeOut(o.transitionTime).removeClass(o.activeClass);
 					
 					$(this).addClass(o.activeClass);
@@ -162,7 +162,7 @@
 				// IF SET TO FALSE, SIMPLY SHOW / HIDE
 				} else {
 				
-					$(o.tabSelector + o.activeClass).removeClass(o.activeClass);
+					$(o.tabSelector).removeClass(o.activeClass);
 					$(o.contentSelector).removeClass(o.activeClass);
 				
 					$(this).addClass(o.activeClass);
